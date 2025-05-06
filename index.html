@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Store Arrangement</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 40px;
+      background: #f0f0f0;
+    }
+    h2 {
+      margin-bottom: 10px;
+      text-align: center;
+      text-transform: uppercase;
+      color: rgb(235, 73, 15);
+    }
+    form {
+      background: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      margin-bottom: 30px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      text-align: center;
+    }
+    input {
+      margin: 5px 10px 5px 0;
+      padding: 8px;
+      width: 200px;
+      border-radius: 4px;
+      border: 1px solid #555555;
+    }
+    button {
+      padding: 8px 15px;
+      background: coral;
+      color: white;
+      border: none;
+      border-radius: 5px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: #b9b8b8;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    th, td {
+      padding: 10px;
+      border: 1px solid #ccc;
+      text-align: center;
+    }
+    th {
+      background: linear-gradient(to right, coral, rgb(170, 70, 87));
+      color: white;
+      text-transform: uppercase; 
+    }
+    footer{
+        /* float: right; */
+        font-style: italic;
+        font-size: 14px;
+        margin-bottom: 20px;
+        padding-right: 20px;
+        position: fixed;
+        bottom: 0;
+        right: 0;
+        margin-right: 10px;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Store Products Arrangement</h2>
+
+  <form id="productForm">
+    <input type="text" id="productNumber" placeholder="Product Number" required>
+    <input type="text" id="productName" placeholder="Name of Product" required>
+    <input type="date" id="expiryDate" required>
+    <button type="submit">Add Product</button>
+  </form>
+
+  <table id="productTable">
+    <thead>
+      <tr>
+        <th>Product Number</th>
+        <th>Name of Product</th>
+        <th>Expiry Date</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+
+  <footer>
+    By Kristyidu &copy;2025. Click on <a href="">GitHub</a> for more
+  </footer>
+
+  <script>
+    let form = document.getElementById('productForm');
+    let tableBody = document.querySelector('#productTable tbody');
+
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      let productNumber = document.getElementById('productNumber').value.trim();
+      let productName = document.getElementById('productName').value.trim();
+      let expiryDate = document.getElementById('expiryDate').value;
+
+      if (productNumber && productName && expiryDate) {
+        const row = document.createElement('tr');
+
+        row.innerHTML = `
+          <td>${productNumber}</td>
+          <td>${productName}</td>
+          <td>${expiryDate}</td>
+        `;
+
+        tableBody.appendChild(row);
+
+        form.reset();
+      }
+    });
+  </script>
+
+</body>
+</html>
