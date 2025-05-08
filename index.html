@@ -1,124 +1,209 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Store Arrangement</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 40px;
-      background: #f0f0f0;
-    }
-    h2 {
-      margin-bottom: 10px;
-      text-align: center;
-      text-transform: uppercase;
-      color: rgb(235, 73, 15);
-    }
-    form {
-      background: #fff;
-      padding: 20px;
-      border-radius: 8px;
-      margin-bottom: 30px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
-      text-align: center;
-    }
-    input {
-      margin: 5px 10px 5px 0;
-      padding: 8px;
-      width: 200px;
-      border-radius: 4px;
-      border: 1px solid #555555;
-    }
-    button {
-      padding: 8px 15px;
-      background: coral;
-      color: white;
-      border: none;
-      border-radius: 5px;
-    }
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      background: #b9b8b8;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
-    }
-    th, td {
-      padding: 10px;
-      border: 1px solid #ccc;
-      text-align: center;
-      text-transform: uppercase;
-    }
-    th {
-      background: linear-gradient(to right, coral, rgb(170, 70, 87));
-      color: white;
-      text-transform: uppercase; 
-    }
-    footer{
-        color: rgb(128, 74, 27);
+  <head>
+    <meta charset="UTF-8" />
+    <title>Store Arrangement</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 40px;
+        background: #f0f0f0;
+      }
+
+      h2 {
+        margin-bottom: 70px;
+        text-align: center;
+        text-transform: uppercase;
+        color: rgb(235, 73, 15);
+        font-size: 2em;
+      }
+
+      #successMessage {
+        text-align: center;
+        color: rgb(207, 1, 1);
+        font-weight: bold;
+        margin-bottom: 20px;
+        display: none;
+        font-size: 1.5em;
+      }
+
+      form {
+        background: #e07171;
+        padding: 20px;
+        border-radius: 8px;
+        margin-bottom: 50px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        text-align: center;
+        width: 90%;
+        margin-left: 20px;
+      }
+
+      input {
+        margin: 5px 10px 5px 0;
+        padding: 8px;
+        width: 200px;
+        border-radius: 4px;
+        border: 1px solid #555555;
+        font-size: 1em;
+      }
+
+      button {
+        padding: 8px 15px;
+        background: coral;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 1em;
+      }
+
+      button:hover {
+        background: #b80404;
+        transition: all 0.1s ease-in-out;
+        transform: translateY(2px);
+        box-shadow: 0 2px 0 #b24d3b;
+      }
+
+      table {
+        width: 80%;
+        border-collapse: collapse;
+        background: #b9b8b8;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        margin: auto;
+      }
+
+      th,
+      td {
+        padding: 10px;
+        border: 1px solid #ccc;
+        text-align: center;
+        text-transform: uppercase;
+      }
+
+      th {
+        background: linear-gradient(to right, coral, rgb(170, 70, 87));
+        color: white;
+      }
+
+      footer {
+        color: rgb(61, 29, 2);
         font-style: italic;
         font-size: 14px;
-        margin-bottom: 20px;
         padding-right: 20px;
         position: fixed;
         bottom: 0;
         right: 0;
-        margin-right: 10px;
-    }
-  </style>
-</head>
-<body>
+        margin: 10px;
+      }
 
-  <h2>Store Product List</h2>
+      .deleteBtn {
+        padding: 5px 10px;
+        background-color: rgb(248, 53, 5);
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 0.9rem;
+      }
 
-  <form id="productForm">
-    <input type="text" id="productNumber" placeholder="Product Number" required>
-    <input type="text" id="productName" placeholder="Name of Product" required>
-    <input type="date" id="expiryDate" required>
-    <button type="submit">Add Product</button>
-  </form>
+      .deleteBtn:hover {
+        background-color: darkred;
+      }
 
-  <table id="productTable">
-    <thead>
-      <tr>
-        <th>Product Number</th>
-        <th>Name of Product</th>
-        <th>Expiry Date</th>
-      </tr>
-    </thead>
-    <tbody></tbody>
-  </table>
+      a {
+        text-decoration: none;
+        color: rgb(56, 2, 2);
+        font-size: large;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>Store Product List</h2>
 
-  <footer>
-    By Kristyidu &copy;2025. Click on <a href="https://github.com/Kristyidu/Store-Arrangement">GitHub</a> for more
-  </footer>
+    <form id="productForm">
+      <input
+        type="text"
+        id="productNumber"
+        placeholder="Product Number"
+        required
+      />
+      <input
+        type="text"
+        id="productName"
+        placeholder="Name of Product"
+        required
+      />
+      <input type="date" id="expiryDate" required />
+      <button type="submit">Add Product</button>
+    </form>
 
-  <script>
-    let form = document.getElementById('productForm');
-    let tableBody = document.querySelector('#productTable tbody');
+    <div id="successMessage">Product added successfully!</div>
 
-    form.addEventListener('submit', function(e) {
-      e.preventDefault();
+    <table id="productTable">
+      <thead>
+        <tr>
+          <th>Product Number</th>
+          <th>Name of Product</th>
+          <th>Expiry Date</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
 
-      let productNumber = document.getElementById('productNumber').value.trim();
-      let productName = document.getElementById('productName').value.trim();
-      let expiryDate = document.getElementById('expiryDate').value;
+    <footer>
+      By Kristyidu &copy;2025. Click on
+      <a href="https://github.com/Kristyidu/Store-Arrangement">GitHub</a> for
+      more
+    </footer>
 
-      if (productNumber && productName && expiryDate) {
-        const row = document.createElement('tr');
+    <script>
+      let form = document.getElementById('productForm');
+      let tableBody = document.querySelector('#productTable tbody');
+      let successMessage = document.getElementById('successMessage');
 
-        row.innerHTML = `
+      form.addEventListener('submit', function (e) {
+        e.preventDefault();
+
+        let productNumber = document
+          .getElementById('productNumber')
+          .value.trim();
+        let productName = document.getElementById('productName').value.trim();
+        let expiryDate = document.getElementById('expiryDate').value;
+
+        if (productNumber && productName && expiryDate) {
+          const row = document.createElement('tr');
+
+          row.innerHTML = `
           <td>${productNumber}</td>
           <td>${productName}</td>
           <td>${expiryDate}</td>
+          <td>
+            <button class="deleteBtn"> Delete </button>
+          </td>
         `;
+          tableBody.appendChild(row);
+          form.reset();
 
-        tableBody.appendChild(row);
+          // Show success message
+          successMessage.style.display = 'block';
+          setTimeout(() => {
+            successMessage.style.display = 'none';
+          }, 2500);
+        }
+      });
 
-        form.reset();
-      }
-    });
-  </script>
-
-</body>
+      // Delete Event
+      tableBody.addEventListener('click', function (e) {
+        if (e.target.classList.contains('deleteBtn')) {
+          const confirmDelete = confirm(
+            'Are you sure you want to delete this product?'
+          );
+          if (confirmDelete) {
+            e.target.closest('tr').remove();
+          }
+        }
+      });
+    </script>
+  </body>
 </html>
